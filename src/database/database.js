@@ -357,6 +357,12 @@ class DB {
     }
   }
 
+  async clearDatabase() {
+    const connection = await this.getConnection();
+    await connection.query(`DROP DATABASE ${config.db.connection.database}`);
+    await this.initializeDatabase();
+  }
+
   async checkDatabaseExists(connection) {
     const [rows] = await connection.execute(`SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?`, [config.db.connection.database]);
     return rows.length > 0;
