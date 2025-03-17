@@ -55,6 +55,7 @@ jobs:
               apiKey: '${{ secrets.FACTORY_API_KEY }}',
             },
             grafana: {
+              source: 'jwt-pizza-service',
               url: 'https://otlp-gateway-prod-us-west-0.grafana.net/otlp/v1/metrics',
               apiKey: '${{ secrets.GRAFANA_API_KEY }}',
             },

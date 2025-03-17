@@ -47,7 +47,7 @@ const sendMetrics = async (metricName) => {
                       },
                       {
                         key: "source",
-                        value: { stringValue: "jwt-pizza-service" },
+                        value: { stringValue: config.grafana.source },
                       },
                     ],
                   },
