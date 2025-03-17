@@ -80,9 +80,7 @@ const sendMetrics = async (metricName) => {
   }
 };
 
-if (config.grafana) {
-  setInterval(() => sendMetrics("requests"), 5000);
-}
+setInterval(() => sendMetrics("requests"), 5000);
 
 module.exports = {
   trackRequests,
