@@ -1,4 +1,4 @@
-const config = require("./config");
+const config = require("../config");
 
 const requests = {};
 
@@ -45,7 +45,10 @@ const sendMetrics = async (metricName) => {
                         key: "endpoint",
                         value: { stringValue: key.split(" ")[1] },
                       },
-                      { key: "source", value: { stringValue: config.source } },
+                      {
+                        key: "source",
+                        value: { stringValue: "jwt-pizza-service" },
+                      },
                     ],
                   },
                 ],
@@ -60,11 +63,11 @@ const sendMetrics = async (metricName) => {
   };
 
   try {
-    const response = await fetch(config.url, {
+    const response = await fetch(config.grafana.url, {
       method: "POST",
       body: JSON.stringify(metrics),
       headers: {
-        Authorization: `Bearer ${config.apiKey}`,
+        Authorization: `Bearer ${config.grafana.apiKey}`,
         "Content-Type": "application/json",
       },
     });
@@ -77,7 +80,9 @@ const sendMetrics = async (metricName) => {
   }
 };
 
-setInterval(() => sendMetrics("requests"), 5000);
+if (config.grafana) {
+  setInterval(() => sendMetrics("requests"), 5000);
+}
 
 module.exports = {
   trackRequests,
