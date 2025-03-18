@@ -1,7 +1,7 @@
 const config = require("../config");
-const { getActiveUserMetrics } = require("./activeUserMetrics");
-const { getHttpMetrics } = require("./httpMetrics");
-const { getSystemMetrics } = require("./systemMetrics");
+const { getActiveUserMetrics } = require("./metricTypes/activeUserMetrics");
+const { getHttpMetrics } = require("./metricTypes/httpMetrics");
+const { getSystemMetrics } = require("./metricTypes/systemMetrics");
 
 const sendMetrics = async () => {
   try {

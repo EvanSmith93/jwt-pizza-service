@@ -1,5 +1,5 @@
 const os = require("os");
-const { sourceAttribute } = require("./helpers/metricsHelpers");
+const { sourceAttribute } = require("../helpers/metricsHelpers");
 
 function getCpuUsagePercentage() {
   const cpuUsage = os.loadavg()[0] / os.cpus().length;

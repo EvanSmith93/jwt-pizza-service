@@ -1,4 +1,4 @@
-const { sourceAttribute } = require("./helpers/metricsHelpers");
+const { sourceAttribute } = require("../helpers/metricsHelpers");
 
 const requests = {};
 
