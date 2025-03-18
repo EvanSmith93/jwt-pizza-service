@@ -3,11 +3,6 @@ const { getActiveUserMetrics } = require("./activeUserMetrics");
 const { getHttpMetrics } = require("./httpMetrics");
 const { getSystemMetrics } = require("./systemMetrics");
 
-const sourceAttribute = {
-  key: "source",
-  value: { stringValue: config.grafana.source },
-};
-
 const sendMetrics = async () => {
   try {
     const metrics = {
@@ -44,6 +39,5 @@ const periodicallySendMetrics = () => {
 };
 
 module.exports = {
-  sourceAttribute,
   periodicallySendMetrics,
 };

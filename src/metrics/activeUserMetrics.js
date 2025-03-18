@@ -1,5 +1,5 @@
 const { DB } = require("../database/database");
-const { sourceAttribute } = require("./metrics");
+const { sourceAttribute } = require("./helpers/metricsHelpers");
 
 const getActiveUserMetrics = async () => {
   return {
