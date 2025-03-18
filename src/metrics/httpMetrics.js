@@ -1,4 +1,4 @@
-const config = require("../config");
+const { sourceAttribute } = require("./metrics");
 
 const requests = {};
 
@@ -33,6 +33,7 @@ const getHttpMetrics = () => {
             asInt: value,
             timeUnixNano: Date.now() * 1000000,
             attributes: [
+              sourceAttribute,
               {
                 key: "method",
                 value: { stringValue: key.split(" ")[0] },
@@ -40,10 +41,6 @@ const getHttpMetrics = () => {
               {
                 key: "endpoint",
                 value: { stringValue: key.split(" ")[1] },
-              },
-              {
-                key: "source",
-                value: { stringValue: config.grafana.source },
               },
             ],
           },

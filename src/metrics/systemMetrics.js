@@ -1,5 +1,5 @@
 const os = require("os");
-const config = require("../config");
+const { sourceAttribute } = require("./metrics");
 
 function getCpuUsagePercentage() {
   const cpuUsage = os.loadavg()[0] / os.cpus().length;
@@ -27,12 +27,7 @@ const getSystemMetrics = () => {
           {
             asDouble: metric.value,
             timeUnixNano: Date.now() * 1000000,
-            attributes: [
-              {
-                key: "source",
-                value: { stringValue: config.grafana.source },
-              },
-            ],
+            attributes: [sourceAttribute],
           },
         ],
       },
