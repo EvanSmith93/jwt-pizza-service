@@ -6,9 +6,11 @@ const version = require("./version.json");
 const config = require("./config.js");
 const { trackRequests } = require("./metrics/metricTypes/httpMetrics.js");
 const { periodicallySendMetrics } = require("./metrics/metrics.js");
+const { trackLatency } = require("./metrics/metricTypes/latencyMetrics.js");
 
 const app = express();
 app.use(express.json());
+app.use(trackLatency);
 app.use(trackRequests);
 app.use(setAuthUser);
 app.use((req, res, next) => {

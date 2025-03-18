@@ -1,11 +1,10 @@
-const { sourceAttribute } = require("../helpers/metricsHelpers");
+const { sourceAttribute, isApiRequest } = require("../helpers/metricsHelpers");
 
 const requests = {};
 
 const trackRequests = (req, res, next) => {
   res.on("finish", () => {
-    if (req.method === "OPTIONS") return;
-    if (!req.baseUrl) return;
+    if (!isApiRequest(req)) return;
 
     const baseUrl = req.baseUrl;
     const routePath = req.route ? req.route.path : "";
