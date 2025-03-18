@@ -1,40 +1,46 @@
-// const os = require("os");
-// const config = require("../config");
+const { sourceAttribute } = require("../helpers/metricsHelpers");
 
-// function getCpuUsagePercentage() {
-//   const cpuUsage = os.loadavg()[0] / os.cpus().length;
-//   return cpuUsage.toFixed(2) * 100;
-// }
+const attempts = {
+  success: 0,
+  fail: 0,
+};
 
-// function getMemoryUsagePercentage() {
-//   const totalMemory = os.totalmem();
-//   const freeMemory = os.freemem();
-//   const usedMemory = totalMemory - freeMemory;
-//   const memoryUsage = (usedMemory / totalMemory) * 100;
-//   return memoryUsage.toFixed(2);
-// }
+const trackAuthSuccess = () => {
+  attempts.success += 1;
+};
 
-// const getSystemMetrics = () => {
-//   return {
-//     metrics: [
-//       { name: "cpu", value: getCpuUsagePercentage() },
-//       { name: "memory", value: getMemoryUsagePercentage() },
-//     ].map((metric) => ({
-//       name: metric.name,
-//       unit: "%",
-//       gauge: {
-//         dataPoints: [
-//           {
-//             asDouble: metric.value,
-//             timeUnixNano: Date.now() * 1000000,
-//             attributes: [sourceAttribute],
-//           },
-//         ],
-//       },
-//     })),
-//   };
-// };
+const trackAuthFail = () => {
+  attempts.fail += 1;
+};
 
-// module.exports = {
-//   getSystemMetrics,
-// };
+const getAuthMetrics = () => {
+  return {
+    metrics: Object.entries(attempts).map(([status, value]) => ({
+      name: "auth_attempts",
+      unit: "1",
+      sum: {
+        dataPoints: [
+          {
+            asInt: value,
+            timeUnixNano: Date.now() * 1000000,
+            attributes: [
+              sourceAttribute,
+              {
+                key: "status",
+                value: { stringValue: status },
+              },
+            ],
+          },
+        ],
+        aggregationTemporality: "AGGREGATION_TEMPORALITY_CUMULATIVE",
+        isMonotonic: true,
+      },
+    })),
+  };
+};
+
+module.exports = {
+  trackAuthSuccess,
+  trackAuthFail,
+  getAuthMetrics,
+};
