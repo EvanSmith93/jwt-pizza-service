@@ -10,7 +10,6 @@ const trackLatency = (req, res, next) => {
 
     const diff = process.hrtime(start);
     const durationMs = diff[0] * 1000 + diff[1] / 1e6;
-    console.log(req.baseUrl, durationMs, latencies);
 
     const factoryCall = req.baseUrl === "/api/order" && req.method === "POST";
 
