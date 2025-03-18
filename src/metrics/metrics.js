@@ -1,13 +1,13 @@
 const config = require("../config");
 const { getHttpMetrics } = require("./httpMetrics");
+const { getSystemMetrics } = require("./systemMetrics");
 
 const sendMetrics = async () => {
-  console.log("sending");
   try {
     const metrics = {
       resourceMetrics: [
         {
-          scopeMetrics: [getHttpMetrics()],
+          scopeMetrics: [getHttpMetrics(), getSystemMetrics()],
         },
       ],
     };
@@ -22,7 +22,7 @@ const sendMetrics = async () => {
     });
 
     if (!response.ok) {
-      console.error("Failed to push metrics data to Grafana", response.error);
+      console.error("Failed to push metrics data to Grafana", response);
     }
   } catch (error) {
     console.error("Error pushing metrics:", error);
