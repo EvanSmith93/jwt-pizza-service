@@ -2,6 +2,7 @@ const config = require("../config");
 const { getActiveUserMetrics } = require("./metricTypes/activeUserMetrics");
 const { getAuthMetrics } = require("./metricTypes/authMetrics");
 const { getHttpMetrics } = require("./metricTypes/httpMetrics");
+const { getPizzaMetrics } = require("./metricTypes/pizzaMetrics");
 const { getSystemMetrics } = require("./metricTypes/systemMetrics");
 
 const sendMetrics = async () => {
@@ -14,6 +15,7 @@ const sendMetrics = async () => {
             getSystemMetrics(),
             await getActiveUserMetrics(),
             getAuthMetrics(),
+            getPizzaMetrics(),
           ],
         },
       ],
