@@ -54,10 +54,14 @@ jobs:
               url: 'https://pizza-factory.cs329.click',
               apiKey: '${{ secrets.FACTORY_API_KEY }}',
             },
-            grafana: {
-              source: 'jwt-pizza-service',
+            grafanaSource: 'jwt-pizza-service',
+            metrics: {
               url: 'https://otlp-gateway-prod-us-west-0.grafana.net/otlp/v1/metrics',
-              apiKey: '${{ secrets.GRAFANA_API_KEY }}',
+              apiKey: '${{ secrets.METRICS_API_KEY }}',
+            },
+            logging: {
+              url: "https://logs-prod-021.grafana.net/loki/api/v1/push",
+              apiKey: '${{ secrets.LOGGING_API_KEY }}',
             },
           };" > src/config.js
 

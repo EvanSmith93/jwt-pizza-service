@@ -2,7 +2,7 @@ const config = require("../../config");
 
 const sourceAttribute = {
   key: "source",
-  value: { stringValue: config.grafana.source },
+  value: { stringValue: config.grafanaSource },
 };
 
 const isApiRequest = (req) => {
