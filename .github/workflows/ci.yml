@@ -60,7 +60,7 @@ jobs:
               apiKey: '${{ secrets.METRICS_API_KEY }}',
             },
             logging: {
-              url: "https://logs-prod-021.grafana.net/loki/api/v1/push",
+              url: 'https://logs-prod-021.grafana.net/loki/api/v1/push',
               apiKey: '${{ secrets.LOGGING_API_KEY }}',
             },
           };" > src/config.js
