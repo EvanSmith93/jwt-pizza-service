@@ -4,14 +4,19 @@ const orderRouter = require("./routes/orderRouter.js");
 const franchiseRouter = require("./routes/franchiseRouter.js");
 const version = require("./version.json");
 const config = require("./config.js");
-const { trackRequests } = require("./metrics/metricTypes/httpMetrics.js");
 const { periodicallySendMetrics } = require("./metrics/metrics.js");
-const { trackLatency } = require("./metrics/metricTypes/latencyMetrics.js");
+const { latencyMetrics } = require("./metrics/metricTypes/latencyMetrics.js");
+const { httpMetrics } = require("./metrics/metricTypes/httpMetrics.js");
+const Logger = require("./logging/logger.js");
 
 const app = express();
 app.use(express.json());
-app.use(trackLatency);
-app.use(trackRequests);
+
+const logger = new Logger(config);
+app.use(logger.httpLogger);
+app.use(latencyMetrics);
+app.use(httpMetrics);
+
 app.use(setAuthUser);
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");

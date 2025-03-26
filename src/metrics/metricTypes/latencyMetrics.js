@@ -2,7 +2,7 @@ const { sourceAttribute, isApiRequest } = require("../helpers/metricsHelpers");
 
 let latencies = [];
 
-const trackLatency = (req, res, next) => {
+const latencyMetrics = (req, res, next) => {
   const start = process.hrtime();
 
   res.on("finish", () => {
@@ -54,6 +54,6 @@ const getLatencyMetrics = () => {
 };
 
 module.exports = {
-  trackLatency,
+  latencyMetrics,
   getLatencyMetrics,
 };

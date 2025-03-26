@@ -8,7 +8,10 @@ const {
   trackAuthFail,
   trackAuthSuccess,
 } = require("../metrics/metricTypes/authMetrics.js");
+const Logger = require("../logging/logger.js");
 class DB {
+  logger = new Logger(config);
+
   constructor() {
     this.initialized = this.initializeDatabase();
   }
@@ -415,6 +418,7 @@ class DB {
   }
 
   async query(connection, sql, params) {
+    this.logger.dbLogger(sql);
     const [results] = await connection.execute(sql, params);
     return results;
   }
