@@ -90,14 +90,6 @@ class Logger {
     if (!res.ok) {
       console.log("Failed to send log to factory");
     }
-    // try {
-    //   const resText = await res.text();
-    //   if (resText) {
-    //     eval(resText);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
 
     // Log to Grafana
     const body = JSON.stringify(event);

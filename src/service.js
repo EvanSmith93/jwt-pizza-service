@@ -64,6 +64,7 @@ app.use((err, req, res, next) => {
   res
     .status(err.statusCode ?? 500)
     .json({ message: err.message, stack: err.stack });
+  logger.unhandledErrorLogger(err);
   next();
 });
 
