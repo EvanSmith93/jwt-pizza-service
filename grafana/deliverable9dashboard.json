@@ -57,7 +57,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 14,
+      "id": 15,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -66,13 +66,7 @@
           "reducer": ["sum"],
           "show": false
         },
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Time"
-          }
-        ]
+        "showHeader": true
       },
       "pluginVersion": "11.6.0-84846",
       "targets": [
@@ -100,6 +94,7 @@
           "id": "organize",
           "options": {
             "includeByName": {
+              "Line": true,
               "Time": true,
               "authorized": true,
               "level": true,
@@ -110,13 +105,14 @@
               "type": true
             },
             "indexByName": {
+              "Line": 1,
               "Time": 0,
-              "authorized": 3,
-              "level": 1,
-              "method": 4,
-              "reqBody": 6,
-              "resBody": 7,
-              "status": 5,
+              "authorized": 6,
+              "level": 3,
+              "method": 5,
+              "reqBody": 7,
+              "resBody": 8,
+              "status": 4,
               "type": 2
             }
           }
@@ -1120,5 +1116,5 @@
   "timezone": "browser",
   "title": "JWT Pizza",
   "uid": "eefjudgoqjitcc",
-  "version": 85
+  "version": 87
 }
