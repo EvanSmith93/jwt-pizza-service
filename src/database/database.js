@@ -193,8 +193,8 @@ class DB {
       const offset = this.getOffset(page, config.db.listPerPage);
       const orders = await this.query(
         connection,
-        `SELECT id, franchiseId, storeId, date FROM dinerOrder WHERE dinerId=? LIMIT ${offset},${config.db.listPerPage}`,
-        [user.id]
+        `SELECT id, franchiseId, storeId, date FROM dinerOrder WHERE dinerId=? LIMIT ?,?`,
+        [user.id, offset, config.db.listPerPage]
       );
       for (const order of orders) {
         let items = await this.query(
@@ -425,8 +425,8 @@ class DB {
 
   async getID(connection, key, value, table) {
     const [rows] = await connection.execute(
-      `SELECT id FROM ${table} WHERE ${key}=?`,
-      [value]
+      `SELECT id FROM ? WHERE ?=?`,
+      [table, key, value]
     );
     if (rows.length > 0) {
       return rows[0].id;
