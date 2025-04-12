@@ -487,6 +487,13 @@ class DB {
             password: "admin",
             roles: [{ role: Role.Admin }],
           };
+          // TODO: implement this
+          // const defaultAdmin = {
+          //   name: "Evan",
+          //   email: config.admin.email,
+          //   password: config.admin.password,
+          //   roles: [{ role: Role.Admin }],
+          // };
           this.addUser(defaultAdmin);
         }
       } finally {
