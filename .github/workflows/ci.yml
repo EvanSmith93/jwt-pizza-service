@@ -119,10 +119,10 @@ jobs:
             jwtSecret: '${{ secrets.JWT_SECRET }}',
             db: {
               connection: {
-                host: ${{ secrets.DB_HOSTNAME }},
-                user: ${{ secrets.DB_USERNAME }},
-                password: ${{ secrets.DB_PASSWORD }},
-                database: 'pizza2',
+                host: '${{ secrets.DB_HOSTNAME }}',
+                user: '${{ secrets.DB_USERNAME }}',
+                password: '${{ secrets.DB_PASSWORD }}',
+                database: 'pizza',
                 connectTimeout: 60000,
               },
               listPerPage: 10,
