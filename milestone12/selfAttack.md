@@ -1,0 +1,43 @@
+| Item           | Result                                                                                                                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | Apr 12, 2025                                                                                                                                                                                    |
+| Target         | pizza.rhythum.click                                                                                                                                                                             |
+| Classification | Injection                                                                                                                                                                                       |
+| Severity       | 2                                                                                                                                                                                               |
+| Description    | SQL injection attack. I was able to change a user's password without knowing their original password. If I know the email of an admin user I could change their password and gain admin access. |
+| Images         | ![Injection Script](sqlInjection.png) <br/> Script for doing the injection attack.                                                                                                              |
+| Corrections    | Sanitize user inputs on the update user endpoint.                                                                                                                                               |
+
+---
+
+| Item           | Result                                                                                                                                                                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | Apr 12, 2025                                                                                                                                                                                                                                |
+| Target         | pizza.rhythum.click                                                                                                                                                                                                                         |
+| Classification | Exposed credentials                                                                                                                                                                                                                         |
+| Severity       | 1                                                                                                                                                                                                                                           |
+| Description    | When the GitHub actions ci pipeline uploads a package, it is publicly accessible within GitHub. Because my repo is public, anyone can access this package. The package contains the production config.js file, which contains many secrets. |
+| Images         | ![Package download on GitHub](package.png) <br/> The GitHub action with a package download option. </br> ![Package folder](packageFolder.png) <br/> The downloaded package folder (with config.js).                                         |
+| Corrections    | Delete the config.js file just before uploading the package in the build stage. Then recreate the config.js file in the deploy stage of the ci pipeline.                                                                                    |
+
+---
+
+| Item           | Result                                                                                                                                                                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | Apr 12, 2025                                                                                                                                                                                                                                |
+| Target         | pizza.rhythum.click                                                                                                                                                                                                                         |
+| Classification | Exposed credentials                                                                                                                                                                                                                         |
+| Severity       | 1                                                                                                                                                                                                                                           |
+| Description    | When the GitHub actions ci pipeline uploads a package, it is publicly accessible within GitHub. Because my repo is public, anyone can access this package. The package contains the production config.js file, which contains many secrets. |
+| Images         | ![Package download on GitHub](package.png) <br/> The GitHub action with a package download option. </br> ![Package folder](packageFolder.png) <br/> The downloaded package folder (with config.js).                                         |
+| Corrections    | Delete the config.js file just before uploading the package in the build stage. Then recreate the config.js file in the deploy stage of the ci pipeline.                                                                                    |
+
+
+### Learning summary
+
+- It would've been better to have a penetration testing environment, and think of it more like testing. We both messed up our production systems when trying to do penetration testing on ourselves.
+- Hackers are really good at what they do. They have to understand everything at a very low level.
+- It's harder to see if the backend is broken or misconfigured since the backend doesn't have visuals. You could be accidentally returning things or allowing things and not realize it for a long time.
+- It's important to have a security mindset when programming because of how easy it is to forget something.
+- Having your code publicly available can make it easier for people to attack you because they're able to find exploits easier. You should design your system to be secure even if attackers can look at your code or your pipelines. The GitHub Actions pipeline let anyone download the artifacts which contained secrets in there. You have to think about security beyond just the code.
+- It was nice to be able to look though the list of most common attacks. There were many things we didn't even know were popular.
