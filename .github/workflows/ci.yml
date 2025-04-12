@@ -122,7 +122,7 @@ jobs:
                 host: ${{ secrets.DB_HOSTNAME }},
                 user: ${{ secrets.DB_USERNAME }},
                 password: ${{ secrets.DB_PASSWORD }},
-                database: 'pizza',
+                database: 'pizza2',
                 connectTimeout: 60000,
               },
               listPerPage: 10,
