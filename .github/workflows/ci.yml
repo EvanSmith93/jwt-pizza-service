@@ -64,8 +64,8 @@ jobs:
               apiKey: '${{ secrets.LOGGING_API_KEY }}',
             },
             admin: {
-              email: "a@jwt.com",
-              password: "admin",
+              email: 'a@jwt.com',
+              password: 'admin',
             },
           };" > src/config.js
 
