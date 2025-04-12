@@ -36,6 +36,35 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Write config file for tests
+        run: |
+          echo "module.exports = {
+            jwtSecret: '${{ secrets.JWT_SECRET }}',
+            db: {
+              connection: {
+                host: '127.0.0.1',
+                user: 'root',
+                password: 'tempdbpassword',
+                database: 'pizza',
+                connectTimeout: 60000,
+              },
+              listPerPage: 10,
+            },
+            factory: {
+              url: 'https://pizza-factory.cs329.click',
+              apiKey: '${{ secrets.FACTORY_API_KEY }}',
+            },
+            grafanaSource: 'jwt-pizza-service',
+            metrics: {
+              url: 'https://otlp-gateway-prod-us-west-0.grafana.net/otlp/v1/metrics',
+              apiKey: '${{ secrets.METRICS_API_KEY }}',
+            },
+            logging: {
+              url: 'https://logs-prod-021.grafana.net/loki/api/v1/push',
+              apiKey: '${{ secrets.LOGGING_API_KEY }}',
+            },
+          };" > src/config.js
+
       - name: Tests
         run: npm test
 
@@ -54,6 +83,7 @@ jobs:
 
       - name: Create dist
         run: |
+          rm src/config.js
           mkdir dist
           cp Dockerfile dist
           cp -r src/* dist
