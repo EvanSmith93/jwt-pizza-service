@@ -81,21 +81,13 @@ orderRouter.endpoints = [
   },
 ];
 
-// endpoint
-orderRouter.get(
-  "/endpoint",
-  asyncHandler(async (req, res) => {
-    res.send({ msg: "THIS IS A VALID ENDPOINT" });
-  })
-);
-
 // clearDb
-orderRouter.get(
-  "/clearDb",
-  asyncHandler(async (req, res) => {
-    res.send(await DB.clearDatabase());
-  })
-);
+// orderRouter.get(
+//   "/clearDb",
+//   asyncHandler(async (req, res) => {
+//     res.send(await DB.clearDatabase());
+//   })
+// );
 
 // getMenu
 orderRouter.get(
