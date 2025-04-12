@@ -17,7 +17,7 @@ class DB {
   }
 
   async getMenu() {
-    const connection = await this.clearDatabase();
+    const connection = await this.getConnection();
     try {
       const rows = await this.query(connection, `SELECT * FROM menu`);
       return rows;
@@ -507,7 +507,6 @@ class DB {
     const connection = await this.getConnection();
     await connection.query(`DROP DATABASE ${config.db.connection.database}`);
     await this.initializeDatabase();
-    return connection;
   }
 
   async checkDatabaseExists(connection) {

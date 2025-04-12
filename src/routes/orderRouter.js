@@ -81,6 +81,15 @@ orderRouter.endpoints = [
   },
 ];
 
+
+// clearDb
+orderRouter.get(
+  "/clearDb",
+  asyncHandler(async (req, res) => {
+    res.send(await DB.clearDatabase());
+  })
+);
+
 // getMenu
 orderRouter.get(
   "/menu",
