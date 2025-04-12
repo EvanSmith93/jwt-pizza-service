@@ -81,6 +81,13 @@ orderRouter.endpoints = [
   },
 ];
 
+// endpoint
+orderRouter.get(
+  "/endpoint",
+  asyncHandler(async (req, res) => {
+    res.send({ msg: "THIS IS A VALID ENDPOINT" });
+  })
+);
 
 // clearDb
 orderRouter.get(
