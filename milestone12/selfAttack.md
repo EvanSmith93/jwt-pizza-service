@@ -1,3 +1,5 @@
+## Self Attacks
+
 | Item           | Result                                                                                                                                                                                          |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Date           | Apr 12, 2025                                                                                                                                                                                    |
@@ -40,7 +42,7 @@
 | Target         | pizza-service.rhythum.click                                                                                                                                                                                                                                                  |
 | Classification | Leaked information                                                                                                                                                                                                                                                           |
 | Severity       | 3                                                                                                                                                                                                                                                                            |
-| Description    | When an unhandled error occurs within the app, the stack trace is returned to the user. While this is not a specific attack in and of itself, it could make it much easier for an attacker to find vulnerabilities because they can tell what's happening within the system. |
+| Description    | When an unhandled error occurs within the app, the stack trace is returned to the user. While this is not a specific attack in and of itself, it could make it much easier for an attacker to find vulnerabilities because they can tell what's happening within the system. For instance, I noticed the stack trace for an incorrect login was different depending on whether the email was a valid user. |
 | Images         | ![Code that returns the stack trace](stackTrace.png) This is the code that returns the error message, along with the stack trace to the user.                                                                                                                                |
 | Corrections    | Either only return the stack trace when not in the development environment or don't return it at all.                                                                                                                                                                        |
 
@@ -56,7 +58,23 @@
 | Images         | ![Code that sets default credentials](defaultCredentials.png) This is the code that sets the default admin user. The password is insecure and is visible to anyone who looks at the code.                                                                                                                                                                                             |
 | Corrections    | Store the default admin password (and possibly also the username) within environment variables both locally and in production. Ensure that the password is something harder to guess.                                                                                                                                                                                                 |
 
-### Learning summary
+## Peer attack
+
+The first thing I tried was to log into his system using the default credentials (username of a@jwt.com and password of admin). However, no such user existed. I could tell that a@jwt.com didn't exist because of the error's stack trace.
+
+I was going to attempt my SQL injection attack, however I noticed by looking at his repository that he had removed the updateUser endpoint, which is the only endpoint I found that was vulnerable to SQL injection. So, this was no longer an option.
+
+On his fork of the jwt-pizza-service repository, I went to his GitHub actions. Under the latest successful pipeline run, I downloaded the package. Contained within it was the config.js file with many of his credentials. I tried several things with these credentials.
+
+I attempted to connect to his database using the database URL and password. However, he had public access to the database disabled, which prevented me from connecting.
+
+With his JWT secret, I tried to sign a JWT token saying I was an admin user. However, in addition to the app using a JWT secret, it also checks to see if the token was in the database. This meant I would need to know what user he was currently signed in as, and recreate his exact same JWT token. Since I did not know the email for any admin users, I was unable to do this.
+
+I spent a while trying to guess an email for an admin user, in hopes I could combine this with the JWT secret to gain admin access. I would try and log in with various emails and checked the error stack trace to see whether or not the email was correct. I tried several variations on a@jwt.com, such as admin@jwt.com and a@test.com. I also looked through his code to see what default emails he used while testing, in hopes he used the same ones for production. Finally, I tried using his BYU email. None of these ended up working. I learned later that he accidentally renamed his admin user's email when attempting a SQL injection attack.
+
+Finally, I had his Grafana metrics and logging API keys. I created a script to repeatedly send metrics reporting large latencies to his Grafana account. I used code from his jwt-pizza-service repository to ensure that it was in the correct format. On my end, it looked like the fake metrics were sending correctly. However, I checked with him afterwards and he didn't see any change on his metrics dashboard. With more time, I likely could've gotten this attack working.
+
+## Learning summary
 
 - It would've been better to have a penetration testing environment, and think of it more like testing. We both messed up our production systems when trying to do penetration testing on ourselves.
 - Hackers are really good at what they do. They have to understand everything at a very low level.
