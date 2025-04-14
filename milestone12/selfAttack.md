@@ -34,15 +34,15 @@
 
 ---
 
-| Item           | Result                          |
-| -------------- | ------------------------------- |
-| Date           | Apr 12, 2025                    |
-| Target         | pizza-service.rhythum.click     |
-| Classification | Leaked information              |
-| Severity       | 3                               |
-| Description    | TODO.                           |
-| Images         | ![TODO](exposedDbUrl.png) TODO. |
-| Corrections    | TODO                            |
+| Item           | Result                                                                                                                                                                                                                                                                       |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | Apr 12, 2025                                                                                                                                                                                                                                                                 |
+| Target         | pizza-service.rhythum.click                                                                                                                                                                                                                                                  |
+| Classification | Leaked information                                                                                                                                                                                                                                                           |
+| Severity       | 3                                                                                                                                                                                                                                                                            |
+| Description    | When an unhandled error occurs within the app, the stack trace is returned to the user. While this is not a specific attack in and of itself, it could make it much easier for an attacker to find vulnerabilities because they can tell what's happening within the system. |
+| Images         | ![Code that returns the stack trace](stackTrace.png) This is the code that returns the error message, along with the stack trace to the user.                                                                                                                                                                                                                                              |
+| Corrections    | Either only return the stack trace when not in the development environment or don't return it at all.                                                                                                                                                                                                                                                                         |
 
 ### Learning summary
 
