@@ -74,6 +74,8 @@ I spent a while trying to guess an email for an admin user, in hopes I could com
 
 Finally, I had his Grafana metrics and logging API keys. I created a script to repeatedly send metrics reporting large latencies to his Grafana account. I used code from his jwt-pizza-service repository to ensure that it was in the correct format. On my end, it looked like the fake metrics were sending correctly. However, I checked with him afterwards and he didn't see any change on his metrics dashboard. With more time, I likely could've gotten this attack working.
 
+In the end, I was not able to attack his system in any way (other than gaining access to various secrets). For that reason, I did not create any attack records.
+
 ## Learning summary
 
 - It would've been better to have a penetration testing environment, and think of it more like testing. We both messed up our production systems when trying to do penetration testing on ourselves.
