@@ -1,7 +1,7 @@
 | Item           | Result                                                                                                                                                                                          |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Date           | Apr 12, 2025                                                                                                                                                                                    |
-| Target         | pizza.rhythum.click                                                                                                                                                                             |
+| Target         | pizza-service.rhythum.click                                                                                                                                                                     |
 | Classification | Injection                                                                                                                                                                                       |
 | Severity       | 2                                                                                                                                                                                               |
 | Description    | SQL injection attack. I was able to change a user's password without knowing their original password. If I know the email of an admin user I could change their password and gain admin access. |
@@ -13,8 +13,8 @@
 | Item           | Result                                                                                                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Date           | Apr 12, 2025                                                                                                                                                                                                                                |
-| Target         | pizza.rhythum.click                                                                                                                                                                                                                         |
-| Classification | Exposed credentials                                                                                                                                                                                                                         |
+| Target         | pizza-service.rhythum.click                                                                                                                                                                                                                 |
+| Classification | Exposed secrets                                                                                                                                                                                                                             |
 | Severity       | 1                                                                                                                                                                                                                                           |
 | Description    | When the GitHub actions ci pipeline uploads a package, it is publicly accessible within GitHub. Because my repo is public, anyone can access this package. The package contains the production config.js file, which contains many secrets. |
 | Images         | ![Package download on GitHub](package.png) <br/> The GitHub action with a package download option. </br> ![Package folder](packageFolder.png) <br/> The downloaded package folder (with config.js).                                         |
@@ -22,16 +22,27 @@
 
 ---
 
-| Item           | Result                                                                                                                                                                                                                                      |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Date           | Apr 12, 2025                                                                                                                                                                                                                                |
-| Target         | pizza.rhythum.click                                                                                                                                                                                                                         |
-| Classification | Exposed credentials                                                                                                                                                                                                                         |
-| Severity       | 1                                                                                                                                                                                                                                           |
-| Description    | When the GitHub actions ci pipeline uploads a package, it is publicly accessible within GitHub. Because my repo is public, anyone can access this package. The package contains the production config.js file, which contains many secrets. |
-| Images         | ![Package download on GitHub](package.png) <br/> The GitHub action with a package download option. </br> ![Package folder](packageFolder.png) <br/> The downloaded package folder (with config.js).                                         |
-| Corrections    | Delete the config.js file just before uploading the package in the build stage. Then recreate the config.js file in the deploy stage of the ci pipeline.                                                                                    |
+| Item           | Result                                                                                                                                                                                                                                                                                                                              |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | Apr 12, 2025                                                                                                                                                                                                                                                                                                                        |
+| Target         | pizza-service.rhythum.click                                                                                                                                                                                                                                                                                                         |
+| Classification | Exposed secrets                                                                                                                                                                                                                                                                                                                     |
+| Severity       | 3                                                                                                                                                                                                                                                                                                                                   |
+| Description    | The backend endpoint for the docs page returns relevant information for the docs page. However, it also returns the database URL. This is not used within the docs page and should be kept a secret. I do not know of any specific attacks that could come from this alone, however it's not a good idea to leak secrets like this. |
+| Images         | ![Exposed database URL on docs endpoint](exposedDbUrl.png) Part of the JSON response for the docs page (including config.db which should be kept secret).                                                                                                                                                                           |
+| Corrections    | Do not return the database URL in the docs response.                                                                                                                                                                                                                                                                                |
 
+---
+
+| Item           | Result                          |
+| -------------- | ------------------------------- |
+| Date           | Apr 12, 2025                    |
+| Target         | pizza-service.rhythum.click     |
+| Classification | Leaked information              |
+| Severity       | 3                               |
+| Description    | TODO.                           |
+| Images         | ![TODO](exposedDbUrl.png) TODO. |
+| Corrections    | TODO                            |
 
 ### Learning summary
 
